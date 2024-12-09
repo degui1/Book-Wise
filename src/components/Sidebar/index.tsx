@@ -1,7 +1,13 @@
 'use client'
 
 import Image from 'next/image'
-import { Binoculars, ChartLineUp, SignOut, User } from '@phosphor-icons/react'
+import {
+  Binoculars,
+  ChartLineUp,
+  SignIn,
+  SignOut,
+  User,
+} from '@phosphor-icons/react'
 import { NavItem } from './components/NavItem'
 import { usePathname } from 'next/navigation'
 
@@ -9,15 +15,15 @@ export function Sidebar() {
   const currentPath = usePathname()
 
   return (
-    <aside className="bg-sidebar flex flex-col items-center gap-16 rounded-xl bg-cover bg-no-repeat py-10">
+    <aside className="flex flex-col items-center gap-16 rounded-xl bg-sidebar bg-cover bg-no-repeat py-10">
       <Image src="/logo.svg" alt="Book wise" width={128} height={32} />
 
       <nav className="space-y-4">
         <NavItem
-          href="/"
+          href="/dashboard"
           icon={ChartLineUp}
           title="Home"
-          isSelected={currentPath === '/'}
+          isSelected={currentPath === '/dashboard'}
         />
         <NavItem
           href="/explorer"
@@ -36,7 +42,11 @@ export function Sidebar() {
       <div className="mt-auto">
         <span className="flex items-center gap-3 font-bold leading-3 text-gray-200">
           Login
-          <SignOut className="h-5 w-5 text-green-100" />
+          <SignIn className="h-5 w-5 text-green-100" />
+        </span>
+        <span className="flex items-center gap-3 font-bold leading-3 text-gray-200">
+          UserName
+          <SignOut className="h-5 w-5 text-exit" />
         </span>
       </div>
     </aside>

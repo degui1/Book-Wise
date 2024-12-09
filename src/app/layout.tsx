@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
 import './globals.css'
-import { Sidebar } from '@/components/Sidebar'
 
 const nunito = Nunito()
 
@@ -18,8 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunito.className} antialiased`}>
-        <div className="grid-cols-app grid min-h-screen bg-gray-800 p-5">
-          <Sidebar />
+        <div className="grid min-h-screen grid-cols-app bg-gray-800 p-5">
           {children}
         </div>
       </body>

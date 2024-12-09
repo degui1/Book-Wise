@@ -33,6 +33,7 @@ export default {
           700: '#181C2A',
           800: '#0E1116',
         },
+        exit: '#F75A68',
       },
       gridTemplateColumns: {
         app: '14rem 1fr',
