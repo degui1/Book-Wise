@@ -26,16 +26,16 @@ export function Sidebar() {
           isSelected={currentPath === '/dashboard'}
         />
         <NavItem
-          href="/explorer"
+          href="/dashboard/explorer"
           icon={Binoculars}
           title="Explorer"
-          isSelected={currentPath === '/explorer'}
+          isSelected={currentPath === '/dashboard/explorer'}
         />
         <NavItem
-          href="/profile"
+          href="/dashboard/profile"
           icon={User}
           title="Profile"
-          isSelected={currentPath === '/profile'}
+          isSelected={currentPath === '/dashboard/profile'}
         />
       </nav>
 

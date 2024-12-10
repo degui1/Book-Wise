@@ -11,6 +11,17 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+        port: '',
+        pathname: '/degui1.png',
+      },
+    ],
+  },
 }
 
 export default nextConfig
