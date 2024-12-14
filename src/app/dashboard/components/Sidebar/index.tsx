@@ -15,10 +15,10 @@ export function Sidebar() {
   const currentPath = usePathname()
 
   return (
-    <aside className="flex flex-col items-center gap-16 rounded-xl bg-sidebar bg-cover bg-no-repeat py-10">
+    <aside className="flex flex-col items-center gap-6 bg-sidebar bg-cover bg-no-repeat py-10 xl:gap-16 xl:rounded-xl">
       <Image src="/logo.svg" alt="Book wise" width={128} height={32} />
 
-      <nav className="space-y-4">
+      <nav className="flex xl:block xl:space-y-4">
         <NavItem
           href="/dashboard"
           icon={ChartLineUp}
@@ -39,7 +39,7 @@ export function Sidebar() {
         />
       </nav>
 
-      <div className="mt-auto">
+      <div className="flex xl:mt-auto xl:block">
         <span className="flex items-center gap-3 font-bold leading-3 text-gray-200">
           Login
           <SignIn className="h-5 w-5 text-green-100" />

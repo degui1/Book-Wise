@@ -17,9 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunito.className} antialiased`}>
-        <div className="grid min-h-screen grid-cols-app bg-gray-800 p-5">
-          {children}
-        </div>
+        <div className="min-h-screen bg-gray-800 xl:p-5">{children}</div>
       </body>
     </html>
   )
