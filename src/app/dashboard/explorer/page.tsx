@@ -1,27 +1,26 @@
 'use client'
 
 import { Binoculars, SealPercent } from '@phosphor-icons/react'
-import { Header } from '../components/Header'
+
 import { InputControl, InputIcon, InputRoot } from '@/app/components/Form/Input'
 import { Checkbox } from '@/app/components/Form/Checkbox'
-import { Rating } from '@/app/components/Rating'
-
-import BookImage from '@/app/assets/book.png'
-import Image from 'next/image'
+import { Header } from '../components/Header'
 import { BookCard } from '../BookCard'
 
 export default function Explorer() {
   return (
     <>
-      <div className="flex justify-between">
+      <div className="space-y-3 xl:flex xl:justify-between xl:space-y-0">
         <Header title="Explorar" icon={Binoculars} />
-        <InputRoot>
-          <InputControl />
-          <InputIcon icon={SealPercent} />
-        </InputRoot>
+        <div className="xl:min-w-96">
+          <InputRoot>
+            <InputControl />
+            <InputIcon icon={SealPercent} />
+          </InputRoot>
+        </div>
       </div>
       <div className="space-y-12">
-        <form className="flex gap-3">
+        <form className="flex flex-nowrap gap-3 overflow-x-auto overflow-y-hidden p-3">
           <Checkbox title="Tudo" checked />
           <Checkbox title="Computação" />
           <Checkbox title="Educação" />
@@ -32,7 +31,7 @@ export default function Explorer() {
           <Checkbox title="Suspense" />
         </form>
 
-        <main className="grid grid-cols-3 gap-5">
+        <main className="flex flex-col gap-5 sm:grid sm:grid-cols-2 xl:grid-cols-3">
           {[1, 2, 3, 4, 5, 6].map((book) => {
             return <BookCard key={book} />
           })}

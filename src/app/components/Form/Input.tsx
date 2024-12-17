@@ -31,7 +31,7 @@ interface InputRootProps {
 
 export function InputRoot({ children }: InputRootProps) {
   return (
-    <div className="group flex min-w-96 items-center gap-2 rounded border border-gray-500 px-5 py-3 focus-within:border-green-200">
+    <div className="group flex w-full items-center gap-2 rounded border border-gray-500 px-5 py-3 focus-within:border-green-200">
       {children}
     </div>
   )
