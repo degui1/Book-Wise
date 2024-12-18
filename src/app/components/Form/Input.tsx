@@ -19,7 +19,6 @@ export function InputControl(props: InputControlProps) {
     <input
       type="text"
       className="flex-1 border-0 bg-transparent text-sm text-gray-200 placeholder-gray-400 outline-none"
-      placeholder="buscar libro"
       {...props}
     />
   )

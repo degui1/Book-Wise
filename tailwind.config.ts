@@ -38,6 +38,7 @@ export default {
       gridTemplateColumns: {
         app: '14rem 1fr',
         dashboard: '1fr 324px',
+        profile: '1fr 308px',
       },
     },
   },

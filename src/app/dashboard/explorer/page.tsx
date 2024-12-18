@@ -1,11 +1,13 @@
 'use client'
 
-import { Binoculars, SealPercent } from '@phosphor-icons/react'
+import { Binoculars, MagnifyingGlass } from '@phosphor-icons/react'
 
 import { InputControl, InputIcon, InputRoot } from '@/app/components/Form/Input'
 import { Checkbox } from '@/app/components/Form/Checkbox'
 import { Header } from '../components/Header'
 import { BookCard } from '../BookCard'
+import {} from 'next'
+// import Head from 'next/head'
 
 export default function Explorer() {
   return (
@@ -14,8 +16,8 @@ export default function Explorer() {
         <Header title="Explorar" icon={Binoculars} />
         <div className="xl:min-w-96">
           <InputRoot>
-            <InputControl />
-            <InputIcon icon={SealPercent} />
+            <InputControl placeholder="Buscar livro" />
+            <InputIcon icon={MagnifyingGlass} />
           </InputRoot>
         </div>
       </div>
@@ -31,7 +33,7 @@ export default function Explorer() {
           <Checkbox title="Suspense" />
         </form>
 
-        <main className="flex flex-col gap-5 sm:grid sm:grid-cols-2 xl:grid-cols-3">
+        <main className="flex flex-col gap-5 sm:grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {[1, 2, 3, 4, 5, 6].map((book) => {
             return <BookCard key={book} />
           })}
