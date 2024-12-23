@@ -1,11 +1,16 @@
-export function AuthImage() {
+import { ComponentProps } from 'react'
+
+interface AuthImageProps extends ComponentProps<'svg'> {}
+
+export function AuthImage(props: AuthImageProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      width={598}
-      height={912}
-      fill="none"
+      // width={598}
+      // height={912}
+      // fill="none"
+      {...props}
     >
       <g clipPath="url(#a)">
         <path
