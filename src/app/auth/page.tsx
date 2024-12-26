@@ -1,4 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
+import GoogleImage from '@/app/assets/google.png'
+import GithubImage from '@/app/assets/github.png'
+import RocketImage from '@/app/assets/rocket.png'
+
 import { OAuth } from './components/OAuth'
 
 export default function Login() {
@@ -22,8 +26,14 @@ export default function Login() {
             </p>
           </header>
 
-          <main className="">
-            <OAuth />
+          <main className="flex flex-col gap-3">
+            <OAuth src={GoogleImage} description="Entrar com o Google" alt="" />
+            <OAuth src={GithubImage} description="Entrar com o GitHub" alt="" />
+            <OAuth
+              src={RocketImage}
+              description="Acessar como visitante"
+              alt=""
+            />
           </main>
         </div>
       </div>
