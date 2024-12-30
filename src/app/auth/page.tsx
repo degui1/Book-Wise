@@ -2,8 +2,7 @@
 import GoogleImage from '@/app/assets/google.png'
 import GithubImage from '@/app/assets/github.png'
 import RocketImage from '@/app/assets/rocket.png'
-
-import { OAuth } from './components/OAuth'
+import { OAuthButton } from '../components/OAuthButton/OAuthButton'
 
 export default function Login() {
   return (
@@ -27,9 +26,17 @@ export default function Login() {
           </header>
 
           <main className="flex flex-col gap-3">
-            <OAuth src={GoogleImage} description="Entrar com o Google" alt="" />
-            <OAuth src={GithubImage} description="Entrar com o GitHub" alt="" />
-            <OAuth
+            <OAuthButton
+              src={GoogleImage}
+              description="Entrar com o Google"
+              alt=""
+            />
+            <OAuthButton
+              src={GithubImage}
+              description="Entrar com o GitHub"
+              alt=""
+            />
+            <OAuthButton
               src={RocketImage}
               description="Acessar como visitante"
               alt=""

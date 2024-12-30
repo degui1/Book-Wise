@@ -11,7 +11,7 @@ import {
 import { Header } from '../components/Header'
 import { InputControl, InputIcon, InputRoot } from '@/app/components/Form/Input'
 import Image from 'next/image'
-import { UserRecords } from './components/UserRecords'
+import { Records } from '../../components/Records'
 import { UserRatedBook } from './components/UserRatedBook'
 
 export default function Profile() {
@@ -50,22 +50,10 @@ export default function Profile() {
           <div className="mx-auto hidden h-1 w-8 rounded-full bg-horizontal-gradient xl:block" />
 
           <section className="grid grid-cols-2 gap-2 sm:flex sm:flex-row sm:justify-between xl:flex-col xl:items-center xl:gap-10">
-            <UserRecords
-              icon={BookOpen}
-              title="3853"
-              description="Páginas lidas"
-            />
-            <UserRecords
-              icon={Books}
-              title="10"
-              description="Livros avaliados"
-            />
-            <UserRecords
-              icon={UserList}
-              title="8"
-              description="Autores lidos"
-            />
-            <UserRecords
+            <Records icon={BookOpen} title="3853" description="Páginas lidas" />
+            <Records icon={Books} title="10" description="Livros avaliados" />
+            <Records icon={UserList} title="8" description="Autores lidos" />
+            <Records
               icon={BookmarkSimple}
               title="Computação"
               description="Categoria mais lida"

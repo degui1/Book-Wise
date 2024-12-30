@@ -1,3 +1,5 @@
+'use client'
+
 import { ElementType } from 'react'
 
 interface UserRecordsProps {
@@ -6,11 +8,7 @@ interface UserRecordsProps {
   description: string
 }
 
-export function UserRecords({
-  icon: Icon,
-  description,
-  title,
-}: UserRecordsProps) {
+export function Records({ icon: Icon, description, title }: UserRecordsProps) {
   return (
     <div className="flex gap-5 sm:w-48">
       <Icon className="h-8 w-8 text-green-100" />

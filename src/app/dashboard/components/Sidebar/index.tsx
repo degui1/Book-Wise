@@ -10,6 +10,7 @@ import {
 } from '@phosphor-icons/react'
 import { NavItem } from './components/NavItem'
 import { usePathname } from 'next/navigation'
+import { OAuth } from '@/app/components/OAuth/OAuth'
 
 export function Sidebar() {
   const currentPath = usePathname()
@@ -40,14 +41,27 @@ export function Sidebar() {
       </nav>
 
       <div className="flex xl:mt-auto xl:block">
-        <span className="flex items-center gap-3 font-bold leading-3 text-gray-200">
-          Login
-          <SignIn className="h-5 w-5 text-green-100" />
-        </span>
-        <span className="flex items-center gap-3 font-bold leading-3 text-gray-200">
-          UserName
-          <SignOut className="h-5 w-5 text-exit" />
-        </span>
+        <OAuth>
+          <button className="flex items-center gap-3 font-bold leading-3 text-gray-200">
+            Login
+            <SignIn className="h-5 w-5 text-green-100" />
+          </button>
+        </OAuth>
+        <div className="flex gap-3">
+          <div className="rounded-full bg-vertical-gradient p-0.5">
+            <Image
+              src="https://github.com/degui1.png"
+              alt=""
+              width={32}
+              height={32}
+              className="rounded-full"
+            />
+          </div>
+          <button className="flex items-center gap-3 font-bold leading-3 text-gray-200">
+            UserName
+            <SignOut className="h-5 w-5 text-exit" />
+          </button>
+        </div>
       </div>
     </aside>
   )

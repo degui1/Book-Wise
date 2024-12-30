@@ -1,9 +1,7 @@
+import { Rating } from '@/app/components/Rating'
 import Image from 'next/image'
 
-import BookImage from '@/app/assets/book.png'
-import { Rating } from '@/app/components/Rating'
-
-export function RatingCard() {
+export function Comment() {
   return (
     <article className="space-y-5 rounded-lg bg-gray-700 p-6">
       <header className="flex gap-4">
@@ -23,20 +21,11 @@ export function RatingCard() {
 
         <Rating />
       </header>
-      <section className="flex gap-5">
-        <Image src={BookImage} alt="" width={108} height={152} />
-        <div className="space-y-5">
-          <div>
-            <h4 className="font-bold text-gray-100">O Hobbit</h4>
-            <p className="text-sm text-gray-400">J.R.R Tolkien</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-300">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil
-              saepe repudiandae corrupti doloribus earum
-            </p>
-          </div>
-        </div>
+      <section>
+        <p className="text-sm text-gray-300">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil saepe
+          repudiandae corrupti doloribus earum
+        </p>
       </section>
     </article>
   )

@@ -19,9 +19,9 @@ export default function Home() {
         <main className="flex flex-1 flex-col">
           <div className="flex justify-between">
             <h2 className="text-sm text-gray-100">Sua última leitura</h2>
-            <span className="flex items-center gap-2 text-sm font-bold text-purple-100">
+            <button className="flex items-center gap-2 text-sm font-bold text-purple-100">
               Ver todas <CaretRight className="h-4 w-4" />
-            </span>
+            </button>
           </div>
 
           <article className="mb-10 mt-4 flex gap-5 rounded bg-gray-600 px-6 py-5">
@@ -59,9 +59,9 @@ export default function Home() {
         <aside className="mb-4 flex flex-col">
           <div className="flex items-center justify-between">
             <h2 className="text-sm text-gray-100">Livros populares</h2>
-            <span className="flex items-center gap-2 text-sm font-bold text-purple-100">
+            <button className="flex items-center gap-2 text-sm font-bold text-purple-100">
               Ver todos <CaretRight className="h-4 w-4" />
-            </span>
+            </button>
           </div>
 
           <div className="mt-4 space-y-3">
