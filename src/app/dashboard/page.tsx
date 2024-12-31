@@ -6,9 +6,9 @@ import { Header } from './components/Header'
 import { RatingCard } from './components/RatingCard'
 import { BookCard } from './BookCard'
 
-import BookImage from '@/app/assets/book.png'
+import BookImage from '@/assets/book.png'
 import Image from 'next/image'
-import { Rating } from '../components/Rating'
+import { Rating } from '@/components/Rating'
 
 export default function Home() {
   return (

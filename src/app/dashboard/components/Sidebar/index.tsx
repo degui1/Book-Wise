@@ -10,14 +10,15 @@ import {
 } from '@phosphor-icons/react'
 import { NavItem } from './components/NavItem'
 import { usePathname } from 'next/navigation'
-import { OAuth } from '@/app/components/OAuth/OAuth'
+import { OAuth } from '@/components/OAuth/OAuth'
+import LogoSVG from '@/assets/logo.svg'
 
 export function Sidebar() {
   const currentPath = usePathname()
 
   return (
     <aside className="flex flex-col items-center gap-6 bg-sidebar bg-cover bg-no-repeat py-10 xl:gap-16 xl:rounded-xl">
-      <Image src="/logo.svg" alt="Book wise" width={128} height={32} />
+      <Image src={LogoSVG} alt="Book wise" width={128} height={32} />
 
       <nav className="flex xl:block xl:space-y-4">
         <NavItem

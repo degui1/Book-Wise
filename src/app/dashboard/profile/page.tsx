@@ -9,10 +9,10 @@ import {
   UserList,
 } from '@phosphor-icons/react'
 import { Header } from '../components/Header'
-import { InputControl, InputIcon, InputRoot } from '@/app/components/Form/Input'
+import { InputControl, InputIcon, InputRoot } from '@/components/Form/Input'
 import Image from 'next/image'
-import { Records } from '../../components/Records'
 import { UserRatedBook } from './components/UserRatedBook'
+import { Records } from '@/components/Records'
 
 export default function Profile() {
   return (

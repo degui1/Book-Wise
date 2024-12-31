@@ -1,7 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { OAuthButton } from '../OAuthButton/OAuthButton'
-import GoogleImage from '@/app/assets/google.png'
-import GithubImage from '@/app/assets/github.png'
+import GoogleImage from '@/assets/google.png'
+import GithubImage from '@/assets/github.png'
 import { X } from '@phosphor-icons/react'
 
 interface OAuthProps {

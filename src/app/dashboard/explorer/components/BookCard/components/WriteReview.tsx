@@ -1,6 +1,6 @@
 'use client'
 
-import { Rating } from '@/app/components/Rating'
+import { Rating } from '@/components/Rating'
 import { Check, X } from '@phosphor-icons/react'
 import Image from 'next/image'
 

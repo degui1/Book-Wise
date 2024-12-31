@@ -1,17 +1,18 @@
-/* eslint-disable @next/next/no-img-element */
-import GoogleImage from '@/app/assets/google.png'
-import GithubImage from '@/app/assets/github.png'
-import RocketImage from '@/app/assets/rocket.png'
-import { OAuthButton } from '../components/OAuthButton/OAuthButton'
+import GoogleImage from '@/assets/google.png'
+import GithubImage from '@/assets/github.png'
+import RocketImage from '@/assets/rocket.png'
+import { OAuthButton } from '@/components/OAuthButton/OAuthButton'
+import AuthImage from '@/assets/auth.svg'
+import Image from 'next/image'
 
 export default function Login() {
   return (
     <div className="flex h-screen p-5">
       <figure className="hidden h-full xl:flex">
-        {/* <Image src={AuthImage} alt="" objectFit="cover" /> */}
-        <img
-          src="/auth.svg"
+        <Image
+          src={AuthImage}
           alt=""
+          objectFit="cover"
           className="h-full rounded-lg object-cover"
         />
       </figure>

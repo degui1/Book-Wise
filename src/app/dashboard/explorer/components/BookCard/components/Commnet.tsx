@@ -1,4 +1,4 @@
-import { Rating } from '@/app/components/Rating'
+import { Rating } from '@/components/Rating'
 import Image from 'next/image'
 
 export function Comment() {

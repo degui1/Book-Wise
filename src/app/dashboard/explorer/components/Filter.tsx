@@ -1,4 +1,4 @@
-import { Checkbox } from '@/app/components/Form/Checkbox'
+import { Checkbox } from '@/components/Form/Checkbox'
 
 export function Filter() {
   return (

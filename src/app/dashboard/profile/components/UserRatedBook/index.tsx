@@ -1,5 +1,5 @@
-import BookImage from '@/app/assets/book.png'
-import { Rating } from '@/app/components/Rating'
+import BookImage from '@/assets/book.png'
+import { Rating } from '@/components/Rating'
 import Image from 'next/image'
 
 export function UserRatedBook() {

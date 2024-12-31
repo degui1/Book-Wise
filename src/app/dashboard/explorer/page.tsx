@@ -1,7 +1,7 @@
 'use client'
 
 import { Binoculars, MagnifyingGlass } from '@phosphor-icons/react'
-import { InputControl, InputIcon, InputRoot } from '@/app/components/Form/Input'
+import { InputControl, InputIcon, InputRoot } from '@/components/Form/Input'
 import { Header } from '../components/Header'
 import { BookCard } from './components/BookCard/BookCard'
 import { Filter } from './components/Filter'

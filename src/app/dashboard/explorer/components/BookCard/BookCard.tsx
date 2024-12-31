@@ -1,10 +1,10 @@
 import Image from 'next/image'
 
-import BookImage from '@/app/assets/book.png'
-import { Rating } from '@/app/components/Rating'
+import BookImage from '@/assets/book.png'
+import { Rating } from '@/components/Rating'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Bookmark, BookOpen, X } from '@phosphor-icons/react'
-import { Records } from '@/app/components/Records'
+import { Records } from '@/components/Records'
 import { WriteReview } from './components/WriteReview'
 import { Comment } from './components/Commnet'
 
