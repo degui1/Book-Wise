@@ -12,9 +12,11 @@ import { NavItem } from './components/NavItem'
 import { usePathname } from 'next/navigation'
 import { OAuth } from '@/components/OAuth/OAuth'
 import LogoSVG from '@/assets/logo.svg'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 export function Sidebar() {
   const currentPath = usePathname()
+  const { data: session } = useSession()
 
   return (
     <aside className="flex flex-col items-center gap-6 bg-sidebar bg-cover bg-no-repeat py-10 xl:gap-16 xl:rounded-xl">
@@ -42,27 +44,37 @@ export function Sidebar() {
       </nav>
 
       <div className="flex xl:mt-auto xl:block">
-        <OAuth>
-          <button className="flex items-center gap-3 font-bold leading-3 text-gray-200">
-            Login
-            <SignIn className="h-5 w-5 text-green-100" />
-          </button>
-        </OAuth>
-        <div className="flex gap-3">
-          <div className="rounded-full bg-vertical-gradient p-0.5">
-            <Image
-              src="https://github.com/degui1.png"
-              alt=""
-              width={32}
-              height={32}
-              className="rounded-full"
-            />
+        {!session && (
+          <OAuth>
+            <button
+              className="flex items-center gap-3 font-bold leading-3 text-gray-200"
+              onClick={() => signIn()}
+            >
+              Login
+              <SignIn className="h-5 w-5 text-green-100" />
+            </button>
+          </OAuth>
+        )}
+        {session && (
+          <div className="flex gap-3">
+            <div className="rounded-full bg-vertical-gradient p-0.5">
+              <Image
+                src="https://github.com/degui1.png"
+                alt=""
+                width={32}
+                height={32}
+                className="rounded-full"
+              />
+            </div>
+            <button
+              className="flex items-center gap-3 font-bold leading-3 text-gray-200"
+              onClick={() => signOut()}
+            >
+              {session.user.name}
+              <SignOut className="h-5 w-5 text-exit" />
+            </button>
           </div>
-          <button className="flex items-center gap-3 font-bold leading-3 text-gray-200">
-            UserName
-            <SignOut className="h-5 w-5 text-exit" />
-          </button>
-        </div>
+        )}
       </div>
     </aside>
   )
