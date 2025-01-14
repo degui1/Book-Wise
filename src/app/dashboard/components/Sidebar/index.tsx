@@ -1,22 +1,24 @@
 'use client'
 
 import Image from 'next/image'
+
+import { NavItem } from './components/NavItem'
+import { usePathname } from 'next/navigation'
+import { OAuth } from '@/components/OAuth/OAuth'
+import LogoSVG from '@/assets/logo.svg'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import {
   Binoculars,
   ChartLineUp,
   SignIn,
   SignOut,
   User,
-} from '@phosphor-icons/react'
-import { NavItem } from './components/NavItem'
-import { usePathname } from 'next/navigation'
-import { OAuth } from '@/components/OAuth/OAuth'
-import LogoSVG from '@/assets/logo.svg'
-import { signIn, signOut, useSession } from 'next-auth/react'
+} from '@/components/Icons'
 
 export function Sidebar() {
   const currentPath = usePathname()
   const { data: session } = useSession()
+  console.log(session)
 
   return (
     <aside className="flex flex-col items-center gap-6 bg-sidebar bg-cover bg-no-repeat py-10 xl:gap-16 xl:rounded-xl">
@@ -45,21 +47,19 @@ export function Sidebar() {
 
       <div className="flex xl:mt-auto xl:block">
         {!session && (
-          <OAuth>
-            <button
-              className="flex items-center gap-3 font-bold leading-3 text-gray-200"
-              onClick={() => signIn()}
-            >
-              Login
-              <SignIn className="h-5 w-5 text-green-100" />
-            </button>
+          <OAuth
+            className="flex items-center gap-3 font-bold leading-3 text-gray-200"
+            onClick={() => signIn()}
+          >
+            Login
+            <SignIn className="h-5 w-5 text-green-100" />
           </OAuth>
         )}
         {session && (
           <div className="flex gap-3">
             <div className="rounded-full bg-vertical-gradient p-0.5">
               <Image
-                src="https://github.com/degui1.png"
+                src={session.user.avatar_url ?? ''}
                 alt=""
                 width={32}
                 height={32}

@@ -2,16 +2,16 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { OAuthButton } from '../OAuthButton/OAuthButton'
 import GoogleImage from '@/assets/google.png'
 import GithubImage from '@/assets/github.png'
-import { X } from '@phosphor-icons/react'
+import { X } from '@/components/Icons'
 
-interface OAuthProps {
+interface OAuthProps extends Dialog.DialogTriggerProps {
   children: React.ReactNode
 }
 
-export function OAuth({ children }: OAuthProps) {
+export function OAuth({ children, ...props }: OAuthProps) {
   return (
     <Dialog.Root>
-      <Dialog.Trigger>{children}</Dialog.Trigger>
+      <Dialog.Trigger {...props}>{children}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/50" />
         <Dialog.Content className="fixed left-1/2 top-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg bg-gray-700 px-16 py-14">

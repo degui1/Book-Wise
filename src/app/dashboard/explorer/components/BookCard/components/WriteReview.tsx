@@ -1,7 +1,5 @@
-'use client'
-
 import { Rating } from '@/components/Rating'
-import { Check, X } from '@phosphor-icons/react'
+import { Check, X } from '@/components/Icons'
 import Image from 'next/image'
 
 export function WriteReview() {

@@ -1,7 +1,3 @@
-'use client'
-
-import { CaretRight, ChartLineUp } from '@phosphor-icons/react'
-
 import { Header } from './components/Header'
 import { RatingCard } from './components/RatingCard'
 import { BookCard } from './BookCard'
@@ -9,6 +5,7 @@ import { BookCard } from './BookCard'
 import BookImage from '@/assets/book.png'
 import Image from 'next/image'
 import { Rating } from '@/components/Rating'
+import { CaretRight, ChartLineUp } from '@/components/Icons'
 
 export default function Home() {
   return (

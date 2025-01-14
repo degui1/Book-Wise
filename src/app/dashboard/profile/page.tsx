@@ -1,5 +1,8 @@
-'use client'
-
+import { Header } from '../components/Header'
+import { InputControl, InputIcon, InputRoot } from '@/components/Form/Input'
+import Image from 'next/image'
+import { UserRatedBook } from './components/UserRatedBook'
+import { Records } from '@/components/Records'
 import {
   BookmarkSimple,
   BookOpen,
@@ -7,13 +10,7 @@ import {
   MagnifyingGlass,
   User,
   UserList,
-} from '@phosphor-icons/react'
-import { Header } from '../components/Header'
-import { InputControl, InputIcon, InputRoot } from '@/components/Form/Input'
-import Image from 'next/image'
-import { UserRatedBook } from './components/UserRatedBook'
-import { Records } from '@/components/Records'
-
+} from '@/components/Icons'
 export default function Profile() {
   return (
     <>

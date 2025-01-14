@@ -3,10 +3,11 @@ import Image from 'next/image'
 import BookImage from '@/assets/book.png'
 import { Rating } from '@/components/Rating'
 import * as Dialog from '@radix-ui/react-dialog'
-import { Bookmark, BookOpen, X } from '@phosphor-icons/react'
+
 import { Records } from '@/components/Records'
 import { WriteReview } from './components/WriteReview'
 import { Comment } from './components/Commnet'
+import { Bookmark, BookOpen, X } from '@/components/Icons'
 
 export function BookCard() {
   return (

@@ -1,6 +1,4 @@
-'use client'
-
-import { Star } from '@phosphor-icons/react'
+import { Star } from '@/components/Icons'
 
 export function Rating() {
   return (
