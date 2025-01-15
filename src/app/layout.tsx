@@ -5,6 +5,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from '@/lib/react-query'
 import SessionProvider from '@/contexts/SessionProvider'
 import { getServerSession } from 'next-auth'
+import { buildNextAuthOption } from './api/auth/[...nextauth]/route'
 
 const nunito = Nunito()
 
@@ -18,7 +19,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const session = await getServerSession()
+  const session = await getServerSession(buildNextAuthOption())
 
   return (
     <html lang="en">

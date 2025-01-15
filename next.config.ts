@@ -20,6 +20,10 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/degui1.png',
       },
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+      },
     ],
   },
 }

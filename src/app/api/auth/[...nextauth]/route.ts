@@ -3,7 +3,7 @@ import { PrismaAdapter } from '@/lib/auth/prisma-adapter'
 import NextAuth, { NextAuthOptions } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 
-function buildNextAuthOption(): NextAuthOptions {
+export function buildNextAuthOption(): NextAuthOptions {
   return {
     secret: process.env.NEXTAUTH_SECRET,
     adapter: PrismaAdapter(),
@@ -20,10 +20,7 @@ function buildNextAuthOption(): NextAuthOptions {
       async session({ session, user }) {
         return {
           ...session,
-          user: {
-            ...user,
-            avatar_url: user.image,
-          },
+          user,
         }
       },
     },

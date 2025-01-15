@@ -9,7 +9,7 @@ export function PrismaAdapter(): Adapter {
           name: user.name ?? '',
           email: user.email,
           emailVerified: user.emailVerified,
-          avatar_url: user.avatar_url,
+          avatar_url: user.image,
         },
       })
     },
@@ -24,7 +24,7 @@ export function PrismaAdapter(): Adapter {
       return {
         id: user.id,
         email: user.email,
-        avatar_url: user.avatar_url,
+        image: user.avatar_url,
         emailVerified: user.emailVerified,
         name: user.name,
       }
@@ -44,7 +44,7 @@ export function PrismaAdapter(): Adapter {
       return {
         id: user.id,
         email: user.email,
-        avatar_url: user.avatar_url,
+        image: user.avatar_url,
         emailVerified: user.emailVerified,
         name: user.name,
       }
@@ -72,7 +72,7 @@ export function PrismaAdapter(): Adapter {
       return {
         id: user.id,
         email: user.email,
-        avatar_url: user.avatar_url,
+        image: user.avatar_url,
         emailVerified: user.emailVerified,
         name: user.name,
       }
@@ -81,7 +81,7 @@ export function PrismaAdapter(): Adapter {
     async updateUser(user) {
       const updatedUser = await prisma.user.update({
         data: {
-          name: user.name,
+          name: user.name ?? '',
           email: user.email,
           emailVerified: user.emailVerified,
         },
@@ -94,7 +94,7 @@ export function PrismaAdapter(): Adapter {
         id: updatedUser.id,
         name: updatedUser.name,
         email: updatedUser.email,
-        avatar_url: updatedUser.avatar_url,
+        image: updatedUser.avatar_url,
         emailVerified: updatedUser.emailVerified,
       }
     },
@@ -162,7 +162,7 @@ export function PrismaAdapter(): Adapter {
           userId: session.user_id,
         },
         user: {
-          avatar_url: user.avatar_url,
+          image: user.avatar_url,
           email: user.email,
           id: user.id,
           emailVerified: user.emailVerified,
