@@ -1,3 +1,5 @@
+'use client'
+
 import { Header } from '../components/Header'
 import { InputControl, InputIcon, InputRoot } from '@/components/Form/Input'
 import Image from 'next/image'
@@ -11,10 +13,13 @@ import {
   User,
   UserList,
 } from '@/components/Icons'
+import { useSession } from 'next-auth/react'
 export default function Profile() {
+  const { data: session } = useSession()
   return (
     <>
       <Header title="Perfil" icon={User} />
+
       <div className="flex flex-col-reverse xl:grid xl:grid-cols-profile xl:gap-16">
         <div className="mt-4 space-y-8 xl:mt-0">
           <form className="flex flex-1">
@@ -33,14 +38,19 @@ export default function Profile() {
         </div>
         <aside className="space-y-4 xl:space-y-8 xl:border-l xl:border-gray-700">
           <div className="flex flex-col items-center">
-            <Image
-              src="https://github.com/degui1.png"
-              width={72}
-              height={72}
-              alt=""
-              className="rounded-full"
-            />
-            <h2 className="mt-5 font-bold text-gray-100">Cristofer Rosser</h2>
+            {session?.user?.image && (
+              <Image
+                src={session.user.image}
+                width={72}
+                height={72}
+                alt=""
+                className="rounded-full"
+                aria-hidden
+              />
+            )}
+            <h2 className="mt-5 font-bold text-gray-100">
+              {session?.user?.name}
+            </h2>
             <p className="text-sm text-gray-400">membro desde 2019</p>
           </div>
 

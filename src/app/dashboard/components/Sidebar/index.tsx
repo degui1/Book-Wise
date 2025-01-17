@@ -36,12 +36,14 @@ export function Sidebar() {
           title="Explorer"
           isSelected={currentPath === '/dashboard/explorer'}
         />
-        <NavItem
-          href="/dashboard/profile"
-          icon={User}
-          title="Profile"
-          isSelected={currentPath === '/dashboard/profile'}
-        />
+        {session && (
+          <NavItem
+            href="/dashboard/profile"
+            icon={User}
+            title="Profile"
+            isSelected={currentPath === '/dashboard/profile'}
+          />
+        )}
       </nav>
 
       <div className="flex xl:mt-auto xl:block">
