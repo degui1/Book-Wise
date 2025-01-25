@@ -1,52 +1,36 @@
+'use client'
+
 import { Header } from '../../components/Header'
 import { InputControl, InputIcon, InputRoot } from '@/components/Form/Input'
 import { UserRatedBook } from '../components/UserRatedBook'
 import { MagnifyingGlass, User } from '@/components/Icons'
 import { api } from '@/lib/axios'
-// import { IRatedBook } from '@/app/api/profile/[userID]/route'
 import { BasicInfoCard } from '../components/BasicInfoCard'
-import { getServerSession } from 'next-auth'
-import { buildNextAuthOption } from '@/app/api/auth/[...nextauth]/route'
 import { IRatedBook } from '@/app/api/profile/[userID]/route'
-// import { useQueries } from '@tanstack/react-query'
-// import { useSession } from 'next-auth/react'
 
-export default async function Profile() {
-  const session = await getServerSession(buildNextAuthOption())
+import { useQueries } from '@tanstack/react-query'
+import { useParams } from 'next/navigation'
+import { Suspense } from 'react'
 
-  const response = await api.get<{ ratedBooks: IRatedBook[] }>(
-    `/profile/rating/4383f783-6ce1-4f92-b1dd-7a7a693c4aef`,
-  )
+export default function Profile() {
+  const { id: userID } = useParams<{ id: string }>()
 
-  const { ratedBooks } = response.data
+  const [{ data: ratedBooks }] = useQueries({
+    queries: [
+      {
+        queryKey: ['rated-books', userID],
+        queryFn: async () => {
+          const response = await api.get<{ ratedBooks: IRatedBook[] }>(
+            `/profile/${userID}`,
+          )
 
-  // const [{ data: ratedBooks }] = useQueries({
-  //   queries: [
-  //     {
-  //       queryKey: ['rated-books', session?.user.id],
-  //       queryFn: async () => {
-  //         const response = await api.get<{ ratedBooks: IRatedBook[] }>(
-  //           `/profile/${session?.user.id}`,
-  //         )
+          return response.data.ratedBooks
+        },
+        initialData: [],
+      },
+    ],
+  })
 
-  //         return response.data.ratedBooks
-  //       },
-  //       initialData: [],
-  //     },
-  //   ],
-  // })
-
-  // const { ratedBooks } = {
-  //   ratedBooks: [
-  //     {
-  //       bookName: 'rating.book.name',
-  //       bookAuthor: 'rating.book.author',
-  //       bookCoverURL: 'rating.book.cover_url',
-  //       rate: 0,
-  //       description: 'rating.description',
-  //     },
-  //   ],
-  // }
   return (
     <>
       <Header title="Perfil" icon={User} />
@@ -77,7 +61,9 @@ export default async function Profile() {
         </div>
 
         <aside className="space-y-4 xl:space-y-8 xl:border-l xl:border-gray-700">
-          <BasicInfoCard />
+          <Suspense fallback={<div>Loading...</div>}>
+            <BasicInfoCard userID={userID} />
+          </Suspense>
         </aside>
       </div>
     </>
