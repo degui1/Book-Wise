@@ -7,11 +7,12 @@ export interface IRatedBook {
   bookCoverURL: string
   rate: number
   description: string
+  createdAt: Date
 }
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { userID: string } },
+  { params }: { params: Promise<{ userID: string }> },
 ) {
   if (req.method !== 'GET') {
     return NextResponse.json('Method not allowed', {
@@ -19,7 +20,7 @@ export async function GET(
     })
   }
 
-  const { userID } = params
+  const { userID } = await params
 
   if (!userID) {
     return new NextResponse('UserID not provided', {
@@ -44,6 +45,7 @@ export async function GET(
     bookCoverURL: rating.book.cover_url,
     rate: rating.rate,
     description: rating.description,
+    createdAt: rating.created_at,
   }))
 
   return NextResponse.json({ ratedBooks })

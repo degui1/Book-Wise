@@ -2,14 +2,6 @@ import { prisma } from '@/lib/prisma'
 import { Prisma } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 
-export interface IRatedBook {
-  bookName: string
-  bookAuthor: string
-  bookCoverURL: string
-  rate: number
-  description: string
-}
-
 export type IRawResponse = Array<{
   total_ratings: bigint
   total_pages: bigint

@@ -1,5 +1,5 @@
 import { InputControl, InputIcon, InputRoot } from '@/components/Form/Input'
-import { Header } from '../components/Header'
+import { Header } from '../../../components/Header'
 import { BookCard } from './components/BookCard/BookCard'
 import { Filter } from './components/Filter'
 import { Binoculars, MagnifyingGlass } from '@/components/Icons'

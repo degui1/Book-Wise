@@ -1,5 +1,5 @@
-import { Header } from './components/Header'
-import { RatingCard } from './components/RatingCard'
+import { RatingCard } from '@/components/RatingCard'
+import { Header } from '@/components/Header'
 import { BookCard } from './BookCard'
 
 import BookImage from '@/assets/book.png'

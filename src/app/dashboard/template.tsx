@@ -1,4 +1,4 @@
-import { Sidebar } from '@/app/dashboard/components/Sidebar'
+import { Sidebar } from '@/components/Sidebar'
 
 interface TemplateProps {
   children: React.ReactNode

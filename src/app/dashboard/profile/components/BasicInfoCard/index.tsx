@@ -54,8 +54,10 @@ export function BasicInfoCard({ userID }: BasicInfoCardProps) {
         <h2 className="mt-5 font-bold text-gray-100">{profile.name}</h2>
         {profile.created_at && (
           <p className="text-sm text-gray-400">
+            membro{' '}
             {formatDistanceToNow(profile.created_at, {
               locale: ptBR,
+              addSuffix: true,
             })}
           </p>
         )}

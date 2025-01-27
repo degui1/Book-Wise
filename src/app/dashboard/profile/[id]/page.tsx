@@ -1,35 +1,15 @@
 'use client'
 
-import { Header } from '../../components/Header'
+import { Header } from '../../../../components/Header'
 import { InputControl, InputIcon, InputRoot } from '@/components/Form/Input'
-import { UserRatedBook } from '../components/UserRatedBook'
+import { UserRatedBooks } from '../components/UserRatedBooks'
 import { MagnifyingGlass, User } from '@/components/Icons'
-import { api } from '@/lib/axios'
 import { BasicInfoCard } from '../components/BasicInfoCard'
-import { IRatedBook } from '@/app/api/profile/[userID]/route'
-
-import { useQueries } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { Suspense } from 'react'
 
 export default function Profile() {
   const { id: userID } = useParams<{ id: string }>()
-
-  const [{ data: ratedBooks }] = useQueries({
-    queries: [
-      {
-        queryKey: ['rated-books', userID],
-        queryFn: async () => {
-          const response = await api.get<{ ratedBooks: IRatedBook[] }>(
-            `/profile/${userID}`,
-          )
-
-          return response.data.ratedBooks
-        },
-        initialData: [],
-      },
-    ],
-  })
 
   return (
     <>
@@ -45,18 +25,9 @@ export default function Profile() {
           </form>
 
           <main className="space-y-6">
-            {ratedBooks?.map(
-              ({ bookAuthor, bookCoverURL, bookName, description, rate }) => (
-                <UserRatedBook
-                  key={bookName}
-                  author={bookAuthor}
-                  bookCoverURL={bookCoverURL}
-                  description={description}
-                  rate={rate}
-                  title={bookName}
-                />
-              ),
-            )}
+            <Suspense fallback={<div>Loading...</div>}>
+              <UserRatedBooks userID={userID} />
+            </Suspense>
           </main>
         </div>
 

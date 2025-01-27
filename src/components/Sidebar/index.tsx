@@ -38,10 +38,10 @@ export function Sidebar() {
         />
         {session && (
           <NavItem
-            href="/dashboard/profile"
+            href={`/dashboard/profile/${session.user.id}`}
             icon={User}
             title="Profile"
-            isSelected={currentPath === '/dashboard/profile'}
+            isSelected={currentPath.includes('/dashboard/profile')}
           />
         )}
       </nav>
