@@ -25,6 +25,12 @@ export function UserRatedBooks({ userID }: UserRatedBooksProps) {
 
   return (
     <>
+      {ratedBooks.length === 0 && (
+        <div className="text-center">
+          <span className="text-lg text-gray-100">Nenhum livro avaliado.</span>
+        </div>
+      )}
+
       {ratedBooks.map(
         ({
           rate,

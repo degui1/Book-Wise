@@ -1,13 +1,29 @@
 import { Rating } from '@/components/Rating'
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import Image from 'next/image'
 
-export function Comment() {
+interface CommentProps {
+  avatarUrl: string
+  username: string
+  createdAt: Date
+  description: string
+  rate: number
+}
+
+export function Comment({
+  avatarUrl,
+  createdAt,
+  description,
+  username,
+  rate,
+}: CommentProps) {
   return (
     <article className="space-y-5 rounded-lg bg-gray-700 p-6">
       <header className="flex gap-4">
         <div className="flex items-center">
           <Image
-            src="https://github.com/degui1.png"
+            src={avatarUrl}
             width={40}
             height={40}
             alt=""
@@ -15,17 +31,19 @@ export function Comment() {
           />
         </div>
         <div className="flex flex-1 flex-col">
-          <h3 className="text-lg font-bold text-gray-100">John Doe</h3>
-          <p className="text-sm text-gray-400">Today</p>
+          <h3 className="text-lg font-bold text-gray-100">{username}</h3>
+          <p className="text-sm text-gray-400">
+            {formatDistanceToNow(createdAt, {
+              addSuffix: true,
+              locale: ptBR,
+            })}
+          </p>
         </div>
 
-        <Rating />
+        <Rating rate={rate} />
       </header>
       <section>
-        <p className="text-sm text-gray-300">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil saepe
-          repudiandae corrupti doloribus earum
-        </p>
+        <p className="text-sm text-gray-300">{description}</p>
       </section>
     </article>
   )

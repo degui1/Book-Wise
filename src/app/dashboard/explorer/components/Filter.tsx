@@ -1,16 +1,25 @@
-import { Checkbox } from '@/components/Form/Checkbox'
+import { Checkbox } from '@/components/Form/Radio'
 
-export function Filter() {
+interface FilterProps {
+  categories: {
+    id: string
+    name: string
+  }[]
+}
+
+export function Filter({ categories }: FilterProps) {
   return (
     <form className="flex flex-nowrap gap-3 overflow-x-auto overflow-y-hidden p-3">
-      <Checkbox title="Tudo" defaultChecked />
-      <Checkbox title="Computação" />
-      <Checkbox title="Educação" />
-      <Checkbox title="Fantasia" />
-      <Checkbox title="Ficção científica" />
-      <Checkbox title="Horror" />
-      <Checkbox title="HQs" />
-      <Checkbox title="Suspense" />
+      <Checkbox title="Tudo" defaultChecked value={''} />
+      {categories.map((category) => {
+        return (
+          <Checkbox
+            key={category.id}
+            title={category.name}
+            value={category.name}
+          />
+        )
+      })}
     </form>
   )
 }
