@@ -51,11 +51,11 @@ export async function GET(
       users.name,
       users.created_at,
       users.avatar_url
-    FROM books
-      INNER JOIN ratings ON (ratings.book_id = books.id)
-      INNER JOIN users ON (users.id = ratings.user_id)
+    FROM users
+      LEFT JOIN ratings ON (ratings.user_id = users.id)
+      LEFT JOIN books ON (books.id = ratings.book_id)
     WHERE
-      ratings.user_id = ${userID}
+      users.id = ${userID}
     GROUP BY
       ratings.user_id
   `)
