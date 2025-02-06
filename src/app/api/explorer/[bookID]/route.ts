@@ -59,7 +59,7 @@ export async function GET(
       totalPages: rawBook[0]?.total_pages || 0,
       numberOfRatings: rawBook[0]?.number_of_ratings.toString() || '0',
       averageRate: rawBook[0]?.average_rate || 0,
-      name: rawBook[0]?.categoryName || '',
+      name: rawBook[0]?.bookName || '',
       coverUrl: rawBook[0]?.cover_url || '',
       author: rawBook[0]?.author || '',
     },

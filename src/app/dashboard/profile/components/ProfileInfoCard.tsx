@@ -8,11 +8,11 @@ import { api } from '@/lib/axios'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
-interface BasicInfoCardProps {
+interface ProfileInfoCardProps {
   userID: string
 }
 
-interface IBasicInfoCardResponse {
+interface IProfileInfoCardResponse {
   total_ratings: string
   total_pages: string
   total_read_books: string
@@ -22,13 +22,13 @@ interface IBasicInfoCardResponse {
   avatar_url: string
 }
 
-export function BasicInfoCard({ userID }: BasicInfoCardProps) {
+export function ProfileInfoCard({ userID }: ProfileInfoCardProps) {
   const [{ data: profile }] = useSuspenseQueries({
     queries: [
       {
         queryKey: ['basic-info-card', userID],
         queryFn: async () => {
-          const response = await api.get<IBasicInfoCardResponse>(
+          const response = await api.get<IProfileInfoCardResponse>(
             `/profile/${userID}`,
           )
 

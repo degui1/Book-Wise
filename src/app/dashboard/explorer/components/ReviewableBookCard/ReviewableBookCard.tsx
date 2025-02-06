@@ -38,13 +38,13 @@ interface BookCardProps {
   bookID: string
 }
 
-export function BookCard({ bookID }: BookCardProps) {
+export function ReviewableBookCard({ bookID }: BookCardProps) {
   const { data: session } = useSession()
 
   const {
     data: { book, ratings },
   } = useSuspenseQuery({
-    queryKey: ['da', bookID],
+    queryKey: ['reviewable-books-explorer-page', bookID],
     queryFn: async () => {
       const response = await api.get<IRatingDialogResponse>(
         `/explorer/${bookID}`,
@@ -63,7 +63,7 @@ export function BookCard({ bookID }: BookCardProps) {
           </div>
           <Image src={book.coverUrl} alt="" width={64} height={94} />
           <div className="space-y-8">
-            <header>
+            <header className="flex flex-col">
               <h4 className="font-bold text-gray-100">{book.name}</h4>
               <p className="text-sm text-gray-400">{book.author}</p>
             </header>
