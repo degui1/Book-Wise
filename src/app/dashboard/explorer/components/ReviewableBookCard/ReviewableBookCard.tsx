@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 
 import { Rating } from '@/components/Rating'
@@ -7,15 +9,16 @@ import { Records } from '@/components/Records'
 import { WriteReview } from './components/WriteReview'
 import { Comment } from './components/Commnet'
 import { Bookmark, BookOpen, X } from '@/components/Icons'
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/axios'
 import { useSession } from 'next-auth/react'
+import React, { useState } from 'react'
 
 interface IRatingDialogResponse {
   book: {
     category: string[]
     totalPages: number
-    numberOfRatings: number
+    numberOfRatings: string
     averageRate: number
     name: string
     coverUrl: string
@@ -35,15 +38,17 @@ interface IRatingDialogResponse {
 }
 
 interface BookCardProps {
+  children: React.ReactNode
   bookID: string
 }
 
-export function ReviewableBookCard({ bookID }: BookCardProps) {
+export function ReviewableBookCard({ children, bookID }: BookCardProps) {
   const { data: session } = useSession()
+  const [isDialogActive, setIsDialogActive] = useState(false)
 
   const {
     data: { book, ratings },
-  } = useSuspenseQuery({
+  } = useQuery({
     queryKey: ['reviewable-books-explorer-page', bookID],
     queryFn: async () => {
       const response = await api.get<IRatingDialogResponse>(
@@ -52,29 +57,27 @@ export function ReviewableBookCard({ bookID }: BookCardProps) {
 
       return response.data
     },
+    enabled: isDialogActive,
+    initialData: {
+      book: {
+        author: '',
+        averageRate: 0,
+        category: [],
+        coverUrl: '',
+        name: '',
+        numberOfRatings: '',
+        totalPages: 0,
+      },
+      ratings: [],
+    },
   })
 
   return (
-    <Dialog.Root>
-      <Dialog.Trigger>
-        <article className="relative flex gap-5 overflow-hidden rounded-lg bg-gray-700 px-5 py-4">
-          <div className="absolute right-0 top-0 rounded-bl-sm bg-green-300 px-3 py-1 text-xs uppercase text-green-100">
-            lido
-          </div>
-          <Image src={book.coverUrl} alt="" width={64} height={94} />
-          <div className="space-y-8">
-            <header className="flex flex-col">
-              <h4 className="font-bold text-gray-100">{book.name}</h4>
-              <p className="text-sm text-gray-400">{book.author}</p>
-            </header>
-
-            <Rating rate={book.averageRate} />
-          </div>
-        </article>
-      </Dialog.Trigger>
+    <Dialog.Root onOpenChange={(open) => setIsDialogActive(open)}>
+      <Dialog.Trigger>{children}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/50" />
-        <Dialog.Content className="fixed right-0 top-0 flex min-h-screen w-full max-w-screen-sm flex-col bg-gray-800 px-12 py-16">
+        <Dialog.Content className="fixed right-0 top-0 flex w-full max-w-screen-sm flex-col bg-gray-800 px-12 py-16">
           <div className="flex items-center justify-between">
             <Dialog.Title className="text-lg font-bold text-gray-100">
               Deixe seu comentário

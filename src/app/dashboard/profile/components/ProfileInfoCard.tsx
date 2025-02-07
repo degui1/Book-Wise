@@ -42,14 +42,15 @@ export function ProfileInfoCard({ userID }: ProfileInfoCardProps) {
     <>
       <div className="flex flex-col items-center">
         {profile.avatar_url && (
-          <Image
-            src={profile.avatar_url}
-            width={72}
-            height={72}
-            alt=""
-            className="rounded-full"
-            aria-hidden
-          />
+          <div className="overflow-hidden rounded-full">
+            <Image
+              src={profile.avatar_url}
+              width={74}
+              height={74}
+              alt=""
+              aria-hidden
+            />
+          </div>
         )}
         <h2 className="mt-5 font-bold text-gray-100">{profile.name}</h2>
         {profile.created_at && (

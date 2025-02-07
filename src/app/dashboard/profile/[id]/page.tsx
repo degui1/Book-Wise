@@ -5,13 +5,13 @@ import { InputControl, InputIcon, InputRoot } from '@/components/Form/Input'
 import { UserRatedBooks } from '../components/UserRatedBooks'
 import { MagnifyingGlass, User } from '@/components/Icons'
 import { useParams } from 'next/navigation'
-import { Suspense, useState } from 'react'
+import { Suspense, useDeferredValue, useState } from 'react'
 import { ProfileInfoCard } from '../components/ProfileInfoCard'
 
 export default function Profile() {
   const { id: userID } = useParams<{ id: string }>()
   const [filter, setFilter] = useState('')
-  // const query = useDeferredValue(filter)
+  const query = useDeferredValue(filter)
 
   return (
     <>
@@ -32,7 +32,7 @@ export default function Profile() {
 
           <main className="space-y-6">
             <Suspense fallback={<div>Loading...</div>}>
-              <UserRatedBooks userID={userID} />
+              <UserRatedBooks userID={userID} filter={query} />
             </Suspense>
           </main>
         </div>

@@ -22,6 +22,10 @@ export async function GET(
 
   const { userID } = await params
 
+  const url = new URL(req.url)
+
+  const filter = url.searchParams.get('book') || ''
+
   if (!userID) {
     return new NextResponse('UserID not provided', {
       status: 400,
@@ -31,6 +35,11 @@ export async function GET(
   const ratings = await prisma.rating.findMany({
     where: {
       user_id: userID,
+      AND: {
+        book: {
+          name: { contains: filter },
+        },
+      },
     },
     include: { book: true },
   })

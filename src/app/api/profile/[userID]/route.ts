@@ -60,8 +60,6 @@ export async function GET(
       ratings.user_id
   `)
 
-  console.log(rawResponse)
-
   return NextResponse.json({
     total_ratings: rawResponse[0]?.total_ratings.toString() || '',
     total_pages: rawResponse[0]?.total_pages.toString() || '',

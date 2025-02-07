@@ -8,14 +8,15 @@ import Image from 'next/image'
 
 interface UserRatedBooksProps {
   userID: string
+  filter: string
 }
 
-export function UserRatedBooks({ userID }: UserRatedBooksProps) {
+export function UserRatedBooks({ userID, filter }: UserRatedBooksProps) {
   const { data: ratedBooks } = useSuspenseQuery({
-    queryKey: ['rated-books', userID],
+    queryKey: ['rated-books', userID, filter],
     queryFn: async () => {
       const response = await api.get<{ ratedBooks: IRatedBook[] }>(
-        `/profile/rating/${userID}`,
+        `/profile/rating/${userID}?book=${filter}`,
       )
 
       return response.data.ratedBooks
@@ -27,7 +28,9 @@ export function UserRatedBooks({ userID }: UserRatedBooksProps) {
     <>
       {ratedBooks.length === 0 && (
         <div className="text-center">
-          <span className="text-lg text-gray-100">Nenhum livro avaliado.</span>
+          <span className="text-lg text-gray-100">
+            Nenhum livro encontrado.
+          </span>
         </div>
       )}
 
