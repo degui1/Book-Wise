@@ -1,34 +1,56 @@
+'use client'
+
 import { Star } from '@/components/Icons'
+import { useState } from 'react'
 
 export interface RatingProps {
   rate: number
+  isEditable?: boolean
+  onChangeRate?: (rate: number) => void
 }
 
-export const Rating = ({ rate }: RatingProps) => {
-  // const handleMouseEnter = (value: number) => {
-  //   if (isEditable) setPreviewValue(value)
-  // }
+export const Rating = ({
+  rate,
+  isEditable = false,
+  onChangeRate,
+}: RatingProps) => {
+  const [previewValue, setPreviewValue] = useState(0)
 
-  // const handleMouseLeave = () => {
-  //   if (isEditable) setPreviewValue(rating)
-  // }
+  function handleMouseEnter(value: number) {
+    if (isEditable) setPreviewValue(value)
+  }
 
-  // const handleSetValue = () => {
-  //   if (isEditable) setRating(ratingValue)
-  // }
+  function handleMouseLeave() {
+    if (isEditable) setPreviewValue(rate)
+  }
+
+  function handleSetValue(rate: number) {
+    if (isEditable && typeof onChangeRate === 'function') {
+      onChangeRate(rate)
+    }
+  }
 
   return (
-    <div className="flex">
-      {Array.from({ length: 5 }).map((_, index) => (
-        <Star
-          key={`star-${index}`}
-          className="fill-purple-100"
-          weight={index + 1 <= rate ? 'fill' : 'regular'}
-          // onMouseEnter={() => handleMouseEnter(index + 1)}
-          // onMouseLeave={handleMouseLeave}
-          // onClick={handleSetValue}
-        />
-      ))}
-    </div>
+    <form className="flex">
+      {Array.from({ length: 5 }).map((_, index) => {
+        const value = index + 1
+        const isFilled = value <= rate || value <= previewValue
+        return (
+          <label
+            key={`star-${index}`}
+            className={isEditable ? 'cursor-pointer' : ''}
+            onMouseEnter={() => handleMouseEnter(value)}
+            onMouseLeave={handleMouseLeave}
+            onClick={() => handleSetValue(value)}
+          >
+            <input type="radio" value={value} className="sr-only" />
+            <Star
+              className="fill-purple-100"
+              weight={isFilled ? 'fill' : 'regular'}
+            />
+          </label>
+        )
+      })}
+    </form>
   )
 }

@@ -72,16 +72,19 @@ export function ProfileInfoCard({ userID }: ProfileInfoCardProps) {
           title={profile.total_pages}
           description="Páginas lidas"
         />
+
         <Records
           icon={Books}
           title={profile.total_ratings}
           description="Livros avaliados"
         />
+
         <Records
           icon={UserList}
           title={profile.total_read_books}
           description="Autores lidos"
         />
+
         <Records
           icon={BookmarkSimple}
           title={profile.most_read_category}
