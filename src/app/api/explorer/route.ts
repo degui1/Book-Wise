@@ -22,10 +22,10 @@ export async function GET(req: NextRequest) {
 
   const url = new URL(req.url)
 
-  const skip = Number(url.searchParams.get('skip')) || 0
-  const take = Number(url.searchParams.get('take')) || 10
+  const skip = Number(url.searchParams.get('skip'))
+  const take = Number(url.searchParams.get('take'))
   const name = url.searchParams.get('name') || ''
-  const category = url.searchParams.get('category') || ''
+  const categoryID = url.searchParams.get('categoryID') || null
 
   const session = await getServerSession(buildNextAuthOption())
 
@@ -40,28 +40,23 @@ export async function GET(req: NextRequest) {
       CASE
         WHEN user_ratings.user_id IS NOT NULL THEN TRUE
         ELSE FALSE 
-      END as hasRead,
-      AVG(avg_ratings.rate) as average_rate
+      END AS hasRead,
+      AVG(avg_ratings.rate) AS average_rate
     FROM books
-      LEFT JOIN ratings as avg_ratings ON (books.id = avg_ratings.book_id)
+      LEFT JOIN ratings AS avg_ratings ON (books.id = avg_ratings.book_id)
       LEFT JOIN ratings AS user_ratings ON (books.id = user_ratings.book_id AND user_ratings.user_id = ${userID})
+      INNER JOIN categoriesOnBooks ON categoriesOnBooks.book_id = books.id
     WHERE
       books.name LIKE CONCAT('%', ${name}, '%')
-      AND EXISTS (
-        SELECT 1
-        FROM categoriesOnBooks
-        INNER JOIN categories ON (categoriesOnBooks.category_id = categories.id)
-        WHERE
-          categories.name LIKE CONCAT('%', ${category}, '%')
-      )
+      AND (${categoryID} IS NULL OR categoriesOnBooks.category_id = ${categoryID})
     GROUP BY
       books.id,
       books.name,
       books.author,
       books.cover_url,
       hasRead
-    LIMIT ${take} 
-    OFFSET ${skip}
+    ${Prisma.raw(take > 0 ? `LIMIT ${take}` : '')}
+    ${Prisma.raw(skip ? `OFFSET ${skip}` : '')}
   `)
 
   const books = rawBooks.map(({ hasRead, ...params }) => ({

@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { api } from '@/lib/axios'
-import { ReviewableBookCard } from './ReviewableBookCard/ReviewableBookCard'
+import { ReviewableBookCard } from '../ReviewableBookCard/ReviewableBookCard'
 import Image from 'next/image'
 import { Rating } from '@/components/Rating'
 
@@ -15,15 +15,15 @@ type IBookResponse = {
 
 interface IBooksProps {
   bookName: string
-  category: string
+  categoryID: string
 }
 
-export function Books({ bookName, category }: IBooksProps) {
+export function Books({ bookName, categoryID }: IBooksProps) {
   const { data: books } = useSuspenseQuery({
-    queryKey: ['explorer-books', bookName, category],
+    queryKey: ['explorer-books', bookName, categoryID],
     queryFn: async () => {
       const response = await api.get<{ books: IBookResponse }>(
-        `/explorer?name=${bookName}&category=${category}`,
+        `/explorer?name=${bookName}&categoryID=${categoryID}`,
       )
 
       return response.data.books

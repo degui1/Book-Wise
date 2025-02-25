@@ -3,16 +3,18 @@
 import { InputControl, InputIcon, InputRoot } from '@/components/Form/Input'
 import { Binoculars, MagnifyingGlass } from '@/components/Icons'
 import { useDeferredValue, useState } from 'react'
-import { Categories } from './components/Categories'
+import { Categories } from './components/Categories/Categories'
 import { SafeSuspense } from '@/components/SafeSuspense'
-import { Books } from './components/Books'
+import { Books } from './components/Books/Books'
 import { Header } from '@/components/Header'
+import { CategoriesLoading } from './components/Categories/Categories.loading'
+import { BooksLoading } from './components/Books/Books.loading'
 
 export default function Explorer() {
   const [bookName, setBookName] = useState('')
   const deferredBookName = useDeferredValue(bookName)
-  const [category, setCategory] = useState('')
-  const deferredCategory = useDeferredValue(category)
+  const [categoryID, setCategoryID] = useState('')
+  const deferredCategoryID = useDeferredValue(categoryID)
 
   return (
     <>
@@ -29,19 +31,20 @@ export default function Explorer() {
           </InputRoot>
         </div>
       </div>
+
       <div className="space-y-12">
-        <form className="flex flex-nowrap gap-3 overflow-x-auto overflow-y-hidden p-3">
-          <SafeSuspense fallback={<div>Loading...</div>}>
-            <Categories
-              category={category}
-              handleOnChangeCategory={setCategory}
-            />
+        <form className="flex flex-row-reverse">
+          <SafeSuspense fallback={<CategoriesLoading />}>
+            <Categories handleOnChangeCategory={setCategoryID} />
           </SafeSuspense>
         </form>
 
         <main className="flex flex-col gap-5 sm:grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-          <SafeSuspense fallback={<div>Loading...</div>}>
-            <Books bookName={deferredBookName} category={deferredCategory} />
+          <SafeSuspense fallback={<BooksLoading />}>
+            <Books
+              bookName={deferredBookName}
+              categoryID={deferredCategoryID}
+            />
           </SafeSuspense>
         </main>
       </div>
