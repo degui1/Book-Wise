@@ -20,10 +20,10 @@ export function Sidebar() {
   const { data: session } = useSession()
 
   return (
-    <aside className="flex flex-col items-center gap-6 bg-sidebar bg-cover bg-no-repeat py-10 xl:gap-16 xl:rounded-xl">
+    <aside className="flex h-full flex-col items-center gap-6 bg-sidebar bg-cover bg-no-repeat py-10 xl:gap-16 xl:rounded-xl">
       <Image src={LogoSVG} alt="Book wise" width={128} height={32} />
 
-      <nav className="flex xl:block xl:space-y-4">
+      <nav className="flex sm:block xl:space-y-4">
         <NavItem
           href="/dashboard"
           icon={ChartLineUp}

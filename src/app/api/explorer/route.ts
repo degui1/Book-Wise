@@ -11,6 +11,9 @@ export type IRawBookResponse = {
   cover_url: string
   hasRead: bigint
   average_rate: number
+  number_of_ratings: bigint
+  total_pages: number
+  categories: string
 }[]
 
 export async function GET(req: NextRequest) {
@@ -39,13 +42,17 @@ export async function GET(req: NextRequest) {
       books.cover_url,
       CASE
         WHEN user_ratings.user_id IS NOT NULL THEN TRUE
-        ELSE FALSE 
+        ELSE FALSE
       END AS hasRead,
-      AVG(avg_ratings.rate) AS average_rate
+      AVG(avg_ratings.rate) AS average_rate,
+      COUNT(avg_ratings.id) AS number_of_ratings,
+      books.total_pages,
+      GROUP_CONCAT(categories.name, ',') AS categories
     FROM books
       LEFT JOIN ratings AS avg_ratings ON (books.id = avg_ratings.book_id)
       LEFT JOIN ratings AS user_ratings ON (books.id = user_ratings.book_id AND user_ratings.user_id = ${userID})
       INNER JOIN categoriesOnBooks ON categoriesOnBooks.book_id = books.id
+      INNER JOIN categories ON categories.id = categoriesOnBooks.category_id
     WHERE
       books.name LIKE CONCAT('%', ${name}, '%')
       AND (${categoryID} IS NULL OR categoriesOnBooks.category_id = ${categoryID})
@@ -59,10 +66,19 @@ export async function GET(req: NextRequest) {
     ${Prisma.raw(skip ? `OFFSET ${skip}` : '')}
   `)
 
-  const books = rawBooks.map(({ hasRead, ...params }) => ({
-    ...params,
-    hasRead: Boolean(hasRead),
-  }))
+  const books = rawBooks.map(
+    ({
+      hasRead,
+      number_of_ratings: numberOfRatings,
+      categories,
+      ...params
+    }) => ({
+      ...params,
+      hasRead: Boolean(hasRead),
+      numberOfRatings: numberOfRatings.toString(),
+      categories: categories.split(','),
+    }),
+  )
 
   return NextResponse.json({ books })
 }

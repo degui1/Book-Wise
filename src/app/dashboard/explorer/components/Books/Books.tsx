@@ -5,12 +5,15 @@ import Image from 'next/image'
 import { Rating } from '@/components/Rating'
 
 type IBookResponse = {
+  hasRead: boolean
+  numberOfRatings: string
+  categories: string[]
   id: string
   name: string
   author: string
   cover_url: string
-  hasRead: boolean
   average_rate: number
+  total_pages: number
 }[]
 
 interface IBooksProps {
@@ -32,18 +35,33 @@ export function Books({ bookName, categoryID }: IBooksProps) {
 
   return books.map((book) => {
     return (
-      <ReviewableBookCard key={book.id} bookID={book.id}>
-        <article className="relative flex gap-5 overflow-hidden rounded-lg bg-gray-700 px-5 py-4">
+      <ReviewableBookCard key={book.id} book={book}>
+        <article
+          className="relative flex h-full max-h-48 w-full max-w-80 gap-5 overflow-hidden rounded-lg bg-gray-700 px-5 py-4"
+          title={book.name}
+        >
           {book.hasRead && (
             <div className="absolute right-0 top-0 rounded-bl-sm bg-green-300 px-3 py-1 text-xs uppercase text-green-100">
               lido
             </div>
           )}
-          <Image src={book.cover_url} alt="" width={64} height={94} />
+          <div className="flex flex-col justify-center">
+            <Image
+              src={book.cover_url}
+              alt=""
+              width={108}
+              height={152}
+              className="max-h-[152px] max-w-[108]"
+            />
+          </div>
           <div className="space-y-8">
-            <header className="flex flex-col">
-              <h4 className="font-bold text-gray-100">{book.name}</h4>
-              <p className="text-sm text-gray-400">{book.author}</p>
+            <header className="space-y-1 text-left">
+              <h4 className="line-clamp-2 font-bold text-gray-100">
+                {book.name}
+              </h4>
+              <p className="line-clamp-2 text-sm text-gray-400">
+                {book.author}
+              </p>
             </header>
 
             <Rating rate={book.average_rate} />
