@@ -1,10 +1,14 @@
 'use client'
 
-import { WriteReview } from '../WriteReview'
-import { Comment } from '../Comment'
+import { WriteReview } from './components/WriteReview'
+import { Comment } from './components/Comment'
 import { useSession } from 'next-auth/react'
 import { useSuspenseQueries } from '@tanstack/react-query'
 import { api } from '@/lib/axios'
+import { Rating } from '@/components/Rating'
+import { formatDistanceToNow } from 'date-fns'
+import Image from 'next/image'
+import { ptBR } from 'date-fns/locale'
 
 interface ReviewProps {
   bookID: string
@@ -52,7 +56,7 @@ export function Reviews({ bookID }: ReviewProps) {
         },
       },
       {
-        queryKey: ['user-write-review', bookID],
+        queryKey: ['get-user-review', bookID],
         async queryFn() {
           const response = await api.get<UserReviewResponse>(
             `/explorer/getUserReview/${bookID}`,
@@ -75,7 +79,47 @@ export function Reviews({ bookID }: ReviewProps) {
       </div>
 
       <div className="space-y-3">
-        {session && <WriteReview userReview={userReview} />}
+        {session && (
+          <>
+            {!userReview && <WriteReview bookID={bookID} />}
+
+            {userReview && (
+              <article className="space-y-5 rounded-lg bg-gray-700 p-6">
+                <header className="flex gap-4">
+                  <div className="flex items-center">
+                    {session?.user.image && (
+                      <Image
+                        src={session?.user.image}
+                        width={40}
+                        height={40}
+                        alt=""
+                        className="rounded-full"
+                      />
+                    )}
+                  </div>
+                  <div className="flex flex-1 flex-col">
+                    <h3 className="text-lg font-bold text-gray-100">
+                      {session?.user.name}
+                    </h3>
+                    <p className="text-sm text-gray-400">
+                      {formatDistanceToNow(userReview.created_at, {
+                        addSuffix: true,
+                        locale: ptBR,
+                      })}
+                    </p>
+                  </div>
+
+                  <Rating rate={userReview.rate} />
+                </header>
+                <section>
+                  <p className="text-sm text-gray-300">
+                    {userReview.description}
+                  </p>
+                </section>
+              </article>
+            )}
+          </>
+        )}
 
         {ratings.map((rating) => {
           return (

@@ -27,6 +27,7 @@ export const Rating = ({
   function handleSetValue(rate: number) {
     if (isEditable && typeof onChangeRate === 'function') {
       onChangeRate(rate)
+      setPreviewValue(rate)
     }
   }
 
@@ -34,7 +35,7 @@ export const Rating = ({
     <form className="flex">
       {Array.from({ length: 5 }).map((_, index) => {
         const value = index + 1
-        const isFilled = value <= rate || value <= previewValue
+        const isFilled = value <= previewValue || value <= rate
         return (
           <label
             key={`star-${index}`}
